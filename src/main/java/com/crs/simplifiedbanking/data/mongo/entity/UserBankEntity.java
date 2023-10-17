@@ -1,8 +1,11 @@
 package com.crs.simplifiedbanking.data.mongo.entity;
 
+import com.crs.simplifiedbanking.core.domain.TypeUserEnum;
 import com.crs.simplifiedbanking.core.domain.UserDomain;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -23,6 +26,7 @@ public class UserBankEntity {
     @Indexed(unique=true)
     private String email;
     private String password;
+    private TypeUserEnum type;
     @Field(value = "create_at")
     private LocalDateTime createAt;
     @Field(value = "update_at")
@@ -36,6 +40,7 @@ public class UserBankEntity {
                 .name(domain.getName())
                 .email(domain.getEmail())
                 .password(domain.getPassword())
+                .type(domain.getType())
                 .createAt(domain.getCreateAt())
                 .updateAt(domain.getUpdateAt())
                 .build();
